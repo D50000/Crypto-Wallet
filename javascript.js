@@ -1,5 +1,6 @@
 //CryptoArray set. elements:{value:10, name:'rose1'}
 let CoinMarketCap = new Array();
+const CoinMarketCapCryptoList = new Array();
 //User CyptoCurrencies Amount of array.
 const myWallet = [
     {Coin:'BTC', amount:0.4626},
@@ -95,7 +96,7 @@ function drawChart(){
     //Insert the option to the Echarts.
     myChart.setOption(option);
     const dashboard = document.getElementById('dashBoard');
-    dashboard.textContent = `${asset} USD`;
+    // dashboard.textContent = `${asset} USD`;
 }
 
 // Create a request variable and assign a new XMLHttpRequest object to it. It's same as  jQuery $.ajax .
@@ -125,9 +126,27 @@ request.onload = function () {
             {price:apiResult.data[2010].quotes.USD.price, coin:apiResult.data[2010].symbol},
             {price:apiResult.data[2083].quotes.USD.price, coin:apiResult.data[2083].symbol}
         ];
+
+        
         balance(temp);
         drawChart();
     } else {
         console.log(`Something Wrong, error code: ${request.status}.`);
     }
 };
+
+function myCrytoCheck() {
+    let input, filter, ul, li, a, i;
+    input = document.getElementById("crytoCheck");
+    filter = input.value.toUpperCase();
+    ul = document.getElementById("myUL");
+    li = ul.getElementsByTagName("li");
+    for (i = 0; i < li.length; i++) {
+        a = li[i].getElementsByTagName("a")[0];
+        if (a.innerHTML.toUpperCase().indexOf(filter) > -1) {
+            li[i].style.display = "";
+        } else {
+            li[i].style.display = "none";
+        }
+    }
+}
