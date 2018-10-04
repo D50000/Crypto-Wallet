@@ -1,6 +1,6 @@
 //CryptoArray set. elements:{value:10, name:'rose1'}
 let CoinMarketCap = new Array();
-const CoinMarketCapCryptoList = new Array();
+let CoinMarketCapCryptoList = new Object();
 //User CyptoCurrencies Amount of array.
 const myWallet = [
     {Coin:'BTC', amount:0.4626},
@@ -127,7 +127,8 @@ request.onload = function () {
             {price:apiResult.data[2083].quotes.USD.price, coin:apiResult.data[2083].symbol}
         ];
 
-        
+        CoinMarketCapCryptoList = apiResult.data;
+        createSearchList(CoinMarketCapCryptoList);
         balance(temp);
         drawChart();
     } else {
@@ -149,4 +150,15 @@ function myCrytoCheck() {
             li[i].style.display = "none";
         }
     }
+}
+
+function createSearchList(objData){
+    // console.log(objData);
+    var resultLi = "";
+    for (let p in objData) {
+        if( objData.hasOwnProperty(p) ) {
+            resultLi += p + " , " + objData[p] + "\n";
+        }
+    }              
+    console.log(resultLi);
 }
