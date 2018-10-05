@@ -1,6 +1,6 @@
 //CryptoArray set. elements:{value:10, name:'rose1'}
 let CoinMarketCap = new Array();
-let CoinMarketCapCryptoList = new Object();
+let CoinMarketCapCryptoList = new Array();
 //User CyptoCurrencies Amount of array.
 const myWallet = [
     {Coin:'BTC', amount:0.4626},
@@ -101,11 +101,11 @@ function drawChart(){
 
 // Create a request variable and assign a new XMLHttpRequest object to it. It's same as  jQuery $.ajax .
 let request = new XMLHttpRequest();
+
 // Open a new connection, using the GET request on the URL endpoint
 request.open('GET', 'https://api.coinmarketcap.com/v2/ticker/', true);
 // Send request
 request.send();
-
 request.onload = function () {
     // Response prototype will be object.
     let apiResult = JSON.parse(this.response);
@@ -127,8 +127,6 @@ request.onload = function () {
             {price:apiResult.data[2083].quotes.USD.price, coin:apiResult.data[2083].symbol}
         ];
 
-        CoinMarketCapCryptoList = apiResult.data;
-        createSearchList(CoinMarketCapCryptoList);
         balance(temp);
         drawChart();
     } else {
@@ -152,13 +150,17 @@ function myCrytoCheck() {
     }
 }
 
-function createSearchList(objData){
-    // console.log(objData);
-    var resultLi = "";
-    for (let p in objData) {
-        if( objData.hasOwnProperty(p) ) {
-            resultLi += p + " , " + objData[p] + "\n";
-        }
-    }              
-    console.log(resultLi);
+function createSearchList(arrayData){
+    console.log("11111"+arrayData);
 }
+            
+const listingsPromise = fetch('https://api.coinmarketcap.com/v2/listings/');
+//callback function, run when response is back.
+listingsPromise.then(result => result.json())
+    .then(result => {CoinMarketCapCryptoList = result.data})
+    .then(result => {console.log(CoinMarketCapCryptoList)})
+    .then(createSearchList(CoinMarketCapCryptoList))
+    .catch((err) => {
+        console.error(err);
+})
+
