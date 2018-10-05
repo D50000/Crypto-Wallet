@@ -155,11 +155,10 @@ function createSearchList(arrayData){
 }
             
 const listingsPromise = fetch('https://api.coinmarketcap.com/v2/listings/');
-//callback function, run when response is back.
 listingsPromise.then(result => result.json())
     .then(result => {CoinMarketCapCryptoList = result.data})
-    .then(result => {console.log(CoinMarketCapCryptoList)})
-    .then(createSearchList(CoinMarketCapCryptoList))
+    .then(() => {console.log(CoinMarketCapCryptoList)})
+    .then(() => {createSearchList(CoinMarketCapCryptoList)})
     .catch((err) => {
         console.error(err);
 })
