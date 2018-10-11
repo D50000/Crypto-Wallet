@@ -165,8 +165,12 @@ function createSearchList(arrayData) {
     arrayData.map(coin => {
         let li_node = document.createElement("li");
         let a_node = document.createElement("a");
-        let textnode = document.createTextNode(`${coin.name} (${coin.symbol})`);
         a_node.setAttribute('href', "#");
+        let checkbox_node = document.createElement("input");
+        checkbox_node.setAttribute("type", "checkbox");
+        checkbox_node.setAttribute("id", `${coin.id}`);
+        let textnode = document.createTextNode(`${coin.name} (${coin.symbol})`);
+        a_node.appendChild(checkbox_node);
         a_node.appendChild(textnode);
         li_node.appendChild(a_node);
         // li_node.appendChild(a_node.appendChild(textnode));
