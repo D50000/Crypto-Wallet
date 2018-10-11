@@ -160,6 +160,10 @@ listingsPromise.then(result => result.json())
     .catch((err) => {
         console.error(err);
     })
+    
+function toggleCheckbox() {
+    alert("sdfsdf");
+}
 
 function createSearchList(arrayData) {
     arrayData.map(coin => {
@@ -173,7 +177,9 @@ function createSearchList(arrayData) {
         a_node.appendChild(checkbox_node);
         a_node.appendChild(textnode);
         li_node.appendChild(a_node);
-        // li_node.appendChild(a_node.appendChild(textnode));
         document.getElementById("myUL").appendChild(li_node);
+        //node list use forEach
+        document.querySelectorAll("ul > li").forEach(li => li.addEventListener("click", toggleCheckbox));
     });
 }
+
