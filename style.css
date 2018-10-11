@@ -13,6 +13,10 @@
     margin-bottom: 12px;
   }
   
+  #myUL li a input{
+    margin-right: 10px;
+  }
+
   #myUL {
     list-style-type: none;
     padding: 0;
