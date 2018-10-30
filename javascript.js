@@ -162,13 +162,10 @@ listingsPromise.then(result => result.json())
         console.error(err);
     })
     
-function toggleCheckbox(coinId, coinSymbol) {
-    // if(document.getElementById(coinId).checked == true){
-        console.log(coinId);
-    // }
-    // let inputbox_node = document.createElement("input");
-    // inputbox_node.setAttribute("type", "text");
-    //document.getElementById(coinId).appendChild(inputbox_node);
+function toggleCheckbox(coinId, coinSymbol, e) {
+    if(document.getElementById(coinId).checked == true){
+        console.log(e);
+    }
 }
 
 function createSearchList(arrayData) {
@@ -180,12 +177,16 @@ function createSearchList(arrayData) {
         checkbox_node.setAttribute("type", "checkbox");
         checkbox_node.setAttribute("id", `${coin.id}`);
         let textnode = document.createTextNode(`${coin.name} (${coin.symbol})`);
+        let inputbox_node = document.createElement("input");
+        inputbox_node.setAttribute("type", "text");
+        inputbox_node.setAttribute("placeholder", `Input ${coin.symbol} volume ...`);
         a_node.appendChild(checkbox_node)
         a_node.appendChild(textnode);
+        a_node.appendChild(inputbox_node);;
         li_node.appendChild(a_node);
         document.getElementById("myUL").appendChild(li_node);
-        //node list use forEach
-        // document.querySelectorAll("ul > li").forEach(li => li.addEventListener("click", toggleCheckbox(coin.id, coin.symbol)));
-        document.getElementById(coin.id).addEventListener("click", toggleCheckbox);
+        document.getElementById(coin.id).addEventListener("click", function(e) {
+            toggleCheckbox(coin.id, coin.symbol, e);
+        });
     });
 }
