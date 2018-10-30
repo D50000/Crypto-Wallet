@@ -163,8 +163,11 @@ listingsPromise.then(result => result.json())
     })
     
 function toggleCheckbox(coinId, coinSymbol, e) {
-    if(document.getElementById(coinId).checked == true){
+    if(document.getElementById(`checkbox_${coinId}`).checked == true){
         console.log(e);
+        document.getElementById(`crytoVolume_${coinId}`).classList.remove("crytoVolume");
+    }else{
+        document.getElementById(`crytoVolume_${coinId}`).classList.add("crytoVolume");
     }
 }
 
@@ -175,17 +178,19 @@ function createSearchList(arrayData) {
         a_node.setAttribute('href', "#");
         let checkbox_node = document.createElement("input");
         checkbox_node.setAttribute("type", "checkbox");
-        checkbox_node.setAttribute("id", `${coin.id}`);
+        checkbox_node.setAttribute("id", `checkbox_${coin.id}`);
         let textnode = document.createTextNode(`${coin.name} (${coin.symbol})`);
         let inputbox_node = document.createElement("input");
         inputbox_node.setAttribute("type", "text");
+        inputbox_node.setAttribute("id", `crytoVolume_${coin.id}`);
+        inputbox_node.setAttribute("class", "crytoVolume");
         inputbox_node.setAttribute("placeholder", `Input ${coin.symbol} volume ...`);
         a_node.appendChild(checkbox_node)
         a_node.appendChild(textnode);
-        a_node.appendChild(inputbox_node);;
+        a_node.appendChild(inputbox_node);
         li_node.appendChild(a_node);
         document.getElementById("myUL").appendChild(li_node);
-        document.getElementById(coin.id).addEventListener("click", function(e) {
+        document.getElementById(`checkbox_${coin.id}`).addEventListener("click", function(e) {
             toggleCheckbox(coin.id, coin.symbol, e);
         });
     });
