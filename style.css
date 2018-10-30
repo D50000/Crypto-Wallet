@@ -38,6 +38,9 @@
     background-color: #e0dddd;
   }
 
+  .crytoVolume{
+    display: none;
+  }
 
 /* For mobile phones: */
 
