@@ -12,9 +12,14 @@
     border: 1px solid #adadad;
     margin-bottom: 12px;
   }
-  
+
+  #myUL li a {
+    cursor: pointer;
+  }
+
   #myUL li a input{
     margin-right: 10px;
+    cursor: pointer;
   }
 
   #myUL {
