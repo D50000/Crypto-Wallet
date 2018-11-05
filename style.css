@@ -1,8 +1,8 @@
 * {
     box-sizing: border-box;
-  }
+}
   
-  #crytoCheck {
+#crytoCheck {
     background-image: url('/css/searchicon.png');
     background-position: 10px 12px;
     background-repeat: no-repeat;
@@ -11,20 +11,67 @@
     padding: 12px 20px 12px 40px;
     border: 1px solid #adadad;
     margin-bottom: 12px;
-  }
+}
 
-  #myUL li a input{
+/* save data button style Start */
+.button {
+    display: inline-block;
+    border-radius: 4px;
+    background-color: #f4511e;
+    border: none;
+    color: #FFFFFF;
+    text-align: center;
+    font-size: 28px;
+    padding: 20px;
+    width: 200px;
+    transition: all 0.5s;
+    cursor: pointer;
+    margin: 5px;
+}
+  
+.button span {
+    cursor: pointer;
+    display: inline-block;
+    position: relative;
+    transition: 0.5s;
+}
+  
+.button span:after {
+    content: '\00bb';
+    position: absolute;
+    opacity: 0;
+    top: 0;
+    right: -20px;
+    transition: 0.5s;
+}
+  
+.button:hover span {
+    padding-right: 25px;
+}
+  
+.button:hover span:after {
+    opacity: 1;
+    right: 0;
+}
+/* save data button style End */
+  
+#myUL li a input[type=checkbox]{
+    margin-left: 10px;
+    cursor: pointer;
+}
+
+#myUL li a input[type=text]{
     margin-left: 10px;
     cursor: auto;
-  }
+}
 
-  #myUL {
+#myUL {
     list-style-type: none;
     padding: 0;
     margin: 0;
-  }
+}
   
-  #myUL li a {
+#myUL li a {
     border: 1px solid #ddd;
     margin-top: -1px; /* Prevent double borders */
     background-color: #f6f6f6;
@@ -33,15 +80,15 @@
     font-size: 18px;
     color: black;
     display: block
-  }
+}
   
-  #myUL li a:hover{
+#myUL li a:hover{
     background-color: #e0dddd;
-  }
+}
 
-  .crytoVolume{
+.crytoVolume{
     display: none;
-  }
+}
 
 /* For mobile phones: */
 
