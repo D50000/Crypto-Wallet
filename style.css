@@ -13,7 +13,7 @@
     margin-bottom: 12px;
 }
 
-/* save data button style Start */
+/* save data button style Start
 .button {
     display: inline-block;
     border-radius: 4px;
@@ -52,7 +52,7 @@
 .button:hover span:after {
     opacity: 1;
     right: 0;
-}
+} */
 /* save data button style End */
   
 #myUL li a input[type=checkbox]{
