@@ -6,16 +6,61 @@
     background-image: url('/css/searchicon.png');
     background-position: 10px 12px;
     background-repeat: no-repeat;
-    width: 100%;
+    width: 80%;
     font-size: 16px;
     padding: 12px 20px 12px 40px;
     border: 1px solid #adadad;
     margin-bottom: 12px;
 }
 
-/* save data button style Start 
-https://codepen.io/tomma5o/pen/zwyKya
-save data button style End */
+/* save data button style Start */
+.button {
+  display: inline-block;
+  border-radius: 10px;
+  background-color: rgba(127, 140, 127, 0.822);
+  border: none;
+  color: #FFFFFF;
+  text-align: center;
+  font-size: 22px;
+  padding: 20px;
+  width: 165px;
+  height: 60px;
+  transition: all 0.5s;
+  cursor: pointer;
+  margin: 5px;
+}
+
+.button span {
+  cursor: pointer;
+  display: inline-block;
+  position: relative;
+  transition: 0.5s;
+}
+
+.button span:after {
+  content: '\00bb';
+  position: absolute;
+  opacity: 0;
+  top: -1px;
+  right: 0px;
+  transition: 0.5s;
+}
+
+.button:hover span {
+  padding-right: 25px;
+}
+
+.button:hover span:after {
+  opacity: 0.7;
+  right: -5px;
+}
+.button:active {
+    background-color: rgba(127, 140, 127, 0.63);
+}
+.button:focus {
+    outline: 0;
+}
+/*save data button style End */
   
 #myUL li a input[type=checkbox]{
     margin-left: 10px;
