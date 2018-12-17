@@ -9,6 +9,9 @@ const myWallet = [
     { Coin: 'ADA', amount: 24533 },
     { Coin: 'BTG', amount: 40.4320 }
 ];
+//User CyptoCurrencies Amount of array.
+const myCryptoWallet = new Array();
+
 // sum balance
 let asset = 0;
 
@@ -194,4 +197,17 @@ function createSearchList(arrayData) {
             toggleCheckbox(coin.id, coin.symbol, e);
         });
     });
+}
+
+function saveToCache(){
+    for (let i = 0; i < CoinMarketCapCryptoList.length; i++) {
+        let coin;
+        document.getElementById("crytoVolume_" + CoinMarketCapCryptoList[i].id).value == "" ? coin = null : coin = parseFloat(document.getElementById("crytoVolume_" + CoinMarketCapCryptoList[i].id).value);
+        if(coin !== 0 && coin !== null && coin !== NaN){
+            //console.log(coin);
+            CoinMarketCapCryptoList[i].volume = coin;
+            myCryptoWallet.push(CoinMarketCapCryptoList[i]);
+            localStorage.myCryptoWallet = JSON.stringify(myCryptoWallet);
+        }
+    }
 }
