@@ -1,35 +1,15 @@
 //CryptoArray set. elements:{value:10, name:'rose1'}
 let CoinMarketCap = new Array();
+//List for coin informations
 let CoinMarketCapCryptoList = new Array();
 //User CyptoCurrencies Amount of array.
-const myWallet = [
-    { Coin: 'BTC', amount: 0.4626 },
-    { Coin: 'ETH', amount: 6.5314 },
-    { Coin: 'BCH', amount: 4.0394 },
-    { Coin: 'ADA', amount: 24533 },
-    { Coin: 'BTG', amount: 40.4320 }
-];
-//User CyptoCurrencies Amount of array.
-const myCryptoWallet = new Array();
+let myCryptoWallet = new Array();
+//Data for Draw the Chart
+let drawData = new Array();
 
-// sum balance
-let asset = 0;
-
-function balance(json) {
-    CoinMarketCap = [
-        { value: json[0].price * myWallet[0].amount, name: json[0].coin },
-        { value: json[1].price * myWallet[1].amount, name: json[1].coin },
-        { value: json[2].price * myWallet[2].amount, name: json[2].coin },
-        { value: json[3].price * myWallet[3].amount, name: json[3].coin },
-        { value: json[4].price * myWallet[4].amount, name: json[4].coin }
-    ];
-
-    CoinMarketCap.forEach(element => {
-        asset += element.value;
-    });
-}
 
 function drawChart() {
+    getDrawData(myCryptoWallet);
     // Initial Echarts
     let myChart = echarts.init(document.getElementById('main'));
     // Configuration the Echarts status.
@@ -102,40 +82,40 @@ function drawChart() {
     // dashboard.textContent = `${asset} USD`;
 }
 
-// Create a request variable and assign a new XMLHttpRequest object to it. It's same as  jQuery $.ajax .
-let request = new XMLHttpRequest();
+// // Create a request variable and assign a new XMLHttpRequest object to it. It's same as  jQuery $.ajax .
+// let request = new XMLHttpRequest();
 
-// Open a new connection, using the GET request on the URL endpoint
-request.open('GET', 'https://api.coinmarketcap.com/v2/ticker/', true);
-// Send request
-request.send();
-request.onload = function () {
-    // Response prototype will be object.
-    let apiResult = JSON.parse(this.response);
+// // Open a new connection, using the GET request on the URL endpoint
+// request.open('GET', 'https://api.coinmarketcap.com/v2/ticker/', true);
+// // Send request
+// request.send();
+// request.onload = function () {
+//     // Response prototype will be object.
+//     let apiResult = JSON.parse(this.response);
 
-    if (request.status == 200) {
-        // apiResult.forEach(crypto => {
-        //     console.log(`${crypto.name} , ${crypto.symbol}`);     
-        // });
-        console.log(`${apiResult.data[1].symbol} , ${apiResult.data[1].quotes.USD.price} USD`);
-        console.log(`${apiResult.data[1027].symbol} , ${apiResult.data[1027].quotes.USD.price} USD`);
-        console.log(`${apiResult.data[1831].symbol} , ${apiResult.data[1831].quotes.USD.price} USD`);
-        console.log(`${apiResult.data[2010].symbol} , ${apiResult.data[2010].quotes.USD.price} USD`);
-        console.log(`${apiResult.data[2083].symbol} , ${apiResult.data[2083].quotes.USD.price} USD`);
-        temp = [
-            { price: apiResult.data[1].quotes.USD.price, coin: apiResult.data[1].symbol },
-            { price: apiResult.data[1027].quotes.USD.price, coin: apiResult.data[1027].symbol },
-            { price: apiResult.data[1831].quotes.USD.price, coin: apiResult.data[1831].symbol },
-            { price: apiResult.data[2010].quotes.USD.price, coin: apiResult.data[2010].symbol },
-            { price: apiResult.data[2083].quotes.USD.price, coin: apiResult.data[2083].symbol }
-        ];
+//     if (request.status == 200) {
+//         // apiResult.forEach(crypto => {
+//         //     console.log(`${crypto.name} , ${crypto.symbol}`);     
+//         // });
+//         console.log(`${apiResult.data[1].symbol} , ${apiResult.data[1].quotes.USD.price} USD`);
+//         console.log(`${apiResult.data[1027].symbol} , ${apiResult.data[1027].quotes.USD.price} USD`);
+//         console.log(`${apiResult.data[1831].symbol} , ${apiResult.data[1831].quotes.USD.price} USD`);
+//         console.log(`${apiResult.data[2010].symbol} , ${apiResult.data[2010].quotes.USD.price} USD`);
+//         console.log(`${apiResult.data[2083].symbol} , ${apiResult.data[2083].quotes.USD.price} USD`);
+//         temp = [
+//             { price: apiResult.data[1].quotes.USD.price, coin: apiResult.data[1].symbol },
+//             { price: apiResult.data[1027].quotes.USD.price, coin: apiResult.data[1027].symbol },
+//             { price: apiResult.data[1831].quotes.USD.price, coin: apiResult.data[1831].symbol },
+//             { price: apiResult.data[2010].quotes.USD.price, coin: apiResult.data[2010].symbol },
+//             { price: apiResult.data[2083].quotes.USD.price, coin: apiResult.data[2083].symbol }
+//         ];
 
-        balance(temp);
-        drawChart();
-    } else {
-        console.log(`Something Wrong, error code: ${request.status}.`);
-    }
-};
+//         balance(temp);
+//         drawChart();
+//     } else {
+//         console.log(`Something Wrong, error code: ${request.status}.`);
+//     }
+// };
 
 //find cryto bar
 function myCrytoCheck() {
@@ -167,7 +147,7 @@ listingsPromise.then(result => result.json())
     
 function toggleCheckbox(coinId, coinSymbol, e) {
     if(document.getElementById(`checkbox_${coinId}`).checked == true){
-        console.log(e);
+        // console.log(e);
         document.getElementById(`crytoVolume_${coinId}`).classList.remove("crytoVolume");
     }else{
         document.getElementById(`crytoVolume_${coinId}`).classList.add("crytoVolume");
@@ -200,6 +180,7 @@ function createSearchList(arrayData) {
 }
 
 function saveToCache(){
+    myCryptoWallet = [];
     for (let i = 0; i < CoinMarketCapCryptoList.length; i++) {
         let coin;
         document.getElementById("crytoVolume_" + CoinMarketCapCryptoList[i].id).value == "" ? coin = null : coin = parseFloat(document.getElementById("crytoVolume_" + CoinMarketCapCryptoList[i].id).value);
@@ -207,7 +188,28 @@ function saveToCache(){
             //console.log(coin);
             CoinMarketCapCryptoList[i].volume = coin;
             myCryptoWallet.push(CoinMarketCapCryptoList[i]);
-            localStorage.myCryptoWallet = JSON.stringify(myCryptoWallet);
         }
     }
+    localStorage.myCryptoWallet = JSON.stringify(myCryptoWallet);
+    getDrawData();
+    drawChart();
+}
+
+function getDrawData(myCryptoWallet){
+    const detialCryptoList = fetch('https://api.coinmarketcap.com/v2/ticker/');
+    detialCryptoList.then(result => result.json())
+        .then(result => {
+            for(let i=0;i<myCryptoWallet.length;i++){
+                let temp = new Object;
+                let key = (myCryptoWallet[i].id);
+                temp.value = myCryptoWallet[i].volume;
+                // temp.price = result.data[key].quotes.USD.price;
+                temp.name = result.data[key].symbol;
+                drawData.push(temp);
+            }
+            console.table(drawData);
+        })
+        .catch((err) => {
+            console.error(err);
+        })
 }
