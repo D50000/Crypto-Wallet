@@ -105,6 +105,7 @@ function toggleCheckbox(coinId, coinSymbol, e) {
         // console.log(e);
         document.getElementById(`crytoVolume_${coinId}`).classList.remove("crytoVolume");
     }else{
+        document.getElementById(`crytoVolume_${coinId}`).value="";
         document.getElementById(`crytoVolume_${coinId}`).classList.add("crytoVolume");
     }
 }
@@ -147,6 +148,10 @@ function saveToCache(){
     }
     localStorage.myCryptoWallet = JSON.stringify(myCryptoWallet);
     getDrawData();
+}
+
+function deleteCache(){
+    localStorage.myCryptoWallet = "";
 }
 
 function getDrawData(){
