@@ -23,8 +23,12 @@
     <div id="main" style="width: 80%;height:500px;"></div>
     <div id="dashBoard">
         <div>
+            <span id="sum">
+                <span class="sumUSD"></span><span>USD</span>
+            </span>
             <input type="text" id="crytoCheck" onkeyup="myCrytoCheck()" placeholder="Search for Crypto currencies ..." title="Type in a name">
             <button class="button" onclick="saveToCache()" style="vertical-align:middle"><span>SAVE </span></button>
+            <button class="button" onclick="deleteCache()" style="vertical-align:middle"><span>RESET</span></button>
         </div>
         <ul id="myUL">
         <!-- <li><a href="#"></a></li> for search list -->
