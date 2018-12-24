@@ -4,6 +4,7 @@ let CoinMarketCapCryptoList = new Array();
 let myCryptoWallet = new Array();
 //Data for Draw the Chart
 let drawData = new Array();
+let drawData2 = new Array();
 
 
 function drawChart() {
@@ -11,65 +12,90 @@ function drawChart() {
     let myChart = echarts.init(document.getElementById('main'));
     // Configuration the Echarts status.
     let option = {
-        title: {
-            text: 'Crypto Wallet',
-            subtext: '---------------------------',
-            x: 'center'
-        },
         tooltip: {
             trigger: 'item',
-            formatter: "{a} <br/>{b} : {c} ({d}%)"
+            formatter: "{a} <br/>{b}: {c} ({d}%)"
         },
         legend: {
-            x: 'center',
-            y: 'bottom'
+            orient: 'vertical',
+            x: 'left',
+            //data:['直达','营销广告','搜索引擎','邮件营销','联盟广告','视频广告','百度','谷歌','必应','其他']
         },
-        toolbox: {
-            show: true,
-            feature: {
-                mark: { show: true },
-                dataView: { show: true, readOnly: false },
-                magicType: {
-                    show: true,
-                    type: ['pie', 'funnel']
-                },
-                restore: { show: true },
-                saveAsImage: { show: true }
-            }
-        },
-        calculable: true,
         series: [
             {
-                name: 'Balance',
-                type: 'pie',
-                radius: [20, 110],
-                center: ['30%', '50%'],
-                roseType: 'area',
+                name:'Volume',
+                type:'pie',
+                selectedMode: 'single',
+                radius: [0, '30%'],
+    
                 label: {
                     normal: {
-                        show: true
-                    },
-                    emphasis: {
-                        show: true
+                        position: 'inner'
                     }
                 },
-                lableLine: {
+                labelLine: {
                     normal: {
                         show: false
-                    },
-                    emphasis: {
-                        show: true
                     }
                 },
                 data: drawData
+            },
+            {
+                name:'Balance',
+                type:'pie',
+                radius: ['40%', '55%'],
+                label: {
+                    normal: {
+                        formatter: '{a|{a}}{abg|}\n{hr|}\n  {b|{b}：}{c}  {per|{d}%}  ',
+                        backgroundColor: '#eee',
+                        borderColor: '#aaa',
+                        borderWidth: 1,
+                        borderRadius: 4,
+                        // shadowBlur:3,
+                        // shadowOffsetX: 2,
+                        // shadowOffsetY: 2,
+                        // shadowColor: '#999',
+                        // padding: [0, 7],
+                        rich: {
+                            a: {
+                                color: '#999',
+                                lineHeight: 22,
+                                align: 'center'
+                            },
+                            // abg: {
+                            //     backgroundColor: '#333',
+                            //     width: '100%',
+                            //     align: 'right',
+                            //     height: 22,
+                            //     borderRadius: [4, 4, 0, 0]
+                            // },
+                            hr: {
+                                borderColor: '#aaa',
+                                width: '100%',
+                                borderWidth: 0.5,
+                                height: 0
+                            },
+                            b: {
+                                fontSize: 16,
+                                lineHeight: 33
+                            },
+                            per: {
+                                color: '#eee',
+                                backgroundColor: '#334455',
+                                padding: [2, 4],
+                                borderRadius: 2
+                            }
+                        }
+                    }
+                },
+                data: drawData2
             }
         ]
     };
     //Insert the option to the Echarts.
     myChart.setOption(option);
-
-    const dashboard = document.getElementById('dashBoard');
-    // dashboard.textContent = `${asset} USD`;
+    // const dashboard = document.getElementById('dashBoard');
+    dashboard.textContent = `${asset} USD`;
 }
 
 //find cryto bar
@@ -159,13 +185,17 @@ function getDrawData(){
     detialCryptoList.then(result => result.json())
         .then(result => {
             drawData = [];
+            drawData2 = [];
             for(let i=0;i<myCryptoWallet.length;i++){
                 let temp = new Object;
+                let temp2 = new Object;
                 let key = (myCryptoWallet[i].id);
                 temp.value = myCryptoWallet[i].volume;
-                // temp.price = result.data[key].quotes.USD.price;
                 temp.name = result.data[key].symbol;
                 drawData.push(temp);
+                temp2.value = myCryptoWallet[i].volume * result.data[key].quotes.USD.price;
+                temp2.name = result.data[key].symbol;
+                drawData2.push(temp2);
             }
             console.log(drawData);
             drawChart();
