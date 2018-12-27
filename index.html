@@ -19,8 +19,10 @@
     <script type='text/javascript' src='https://www.freevisitorcounters.com/auth.php?id=f14912b2fe83ab61f35cf30b65c8475cc746bc41'></script>
     <script type="text/javascript" src="https://www.freevisitorcounters.com/en/home/counter/412047/t/7"></script> -->
     
+    <div class="title">Crypto-Wallet</div>
+    <div class="title">------------------------</div>
     <!-- Create a DOM for ECharts require width and height. -->
-    <div id="main" style="width: 80%;height:500px;"></div>
+    <div id="main" style="width:80%; height:500px; margin: 0 auto;"></div>
     <div id="dashBoard">
         <div>
             <span id="sum">
@@ -37,6 +39,12 @@
 </body>
 
 <script src="javascript.js"></script>
-
+<script type="text/javascript">
+    (function() {
+        // page initialization
+        loadData();
+        drawChart();
+    })();
+</script>
 
 </html>
