@@ -1,10 +1,14 @@
 # Crypto-Wallet
-Crypto Wallet detail
+It's a Crpto-Wallet in local browser.
+Let you manage all your Cryptocurrency and combine them in this dashboard.
 
-initial
+## Live Demo
 https://d50000.github.io/Crypto-Wallet/
 
-
-todo issue:
-1.list and detail api not match.
-2.input NaN check.
+## features
+ - Simple, convenience, visualization and easy to use.
+ - Support all Kinds of Cryptocurrency. (data source: https://coinmarketcap.com/)
+ - Local storage in your own browser.
+#### Todo
+	Issue 1: list and detail api not match.
+	Issue 2: input NaN check.
