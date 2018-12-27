@@ -6,6 +6,10 @@ let myCryptoWallet = new Array();
 let drawData = new Array();
 let drawData2 = new Array();
 
+function loadData(){
+    drawData = JSON.parse(localStorage.drawData);
+    drawData2 = JSON.parse(localStorage.drawData2);
+}
 
 function drawChart() {
     // Initial Echarts
@@ -94,8 +98,12 @@ function drawChart() {
     };
     //Insert the option to the Echarts.
     myChart.setOption(option);
-    // const dashboard = document.getElementById('dashBoard');
-    dashboard.textContent = `${asset} USD`;
+    const dashboard = document.getElementsByClassName('sumUSD')[0];
+    let balance = 0;
+    for(let i=0;i<drawData.length;i++){
+        balance += drawData[i].value * drawData2[i].value;
+    }
+    dashboard.textContent = `$${balance}`;
 }
 
 //find cryto bar
@@ -172,12 +180,12 @@ function saveToCache(){
             myCryptoWallet.push(CoinMarketCapCryptoList[i]);
         }
     }
-    localStorage.myCryptoWallet = JSON.stringify(myCryptoWallet);
     getDrawData();
 }
 
 function deleteCache(){
-    localStorage.myCryptoWallet = "";
+    localStorage.drawData = undefined;
+    localStorage.drawData2 = undefined;
 }
 
 function getDrawData(){
@@ -197,7 +205,8 @@ function getDrawData(){
                 temp2.name = result.data[key].symbol;
                 drawData2.push(temp2);
             }
-            console.log(drawData);
+            localStorage.drawData = JSON.stringify(drawData);
+            localStorage.drawData2 = JSON.stringify(drawData2);
             drawChart();
         })
         .catch((err) => {
