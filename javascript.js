@@ -7,8 +7,11 @@ let drawData = new Array();
 let drawData2 = new Array();
 
 function loadData(){
+    if(localStorage.length === 0)return;
     drawData = JSON.parse(localStorage.drawData);
     drawData2 = JSON.parse(localStorage.drawData2);
+    if(drawData.length === 0 || drawData2.length === 0)return;
+    drawChart();
 }
 
 function drawChart() {
@@ -23,7 +26,6 @@ function drawChart() {
         legend: {
             orient: 'vertical',
             x: 'left',
-            //data:['直达','营销广告','搜索引擎','邮件营销','联盟广告','视频广告','百度','谷歌','必应','其他']
         },
         series: [
             {
@@ -101,7 +103,7 @@ function drawChart() {
     const dashboard = document.getElementsByClassName('sumUSD')[0];
     let balance = 0;
     for(let i=0;i<drawData.length;i++){
-        balance += drawData[i].value * drawData2[i].value;
+        balance += (drawData[i].value * drawData2[i].value);
     }
     dashboard.textContent = `$${balance}`;
 }
