@@ -103,7 +103,7 @@ function drawChart() {
     const dashboard = document.getElementsByClassName('sumUSD')[0];
     let balance = 0;
     for(let i=0;i<drawData.length;i++){
-        balance += (drawData[i].value * drawData2[i].value);
+        balance += drawData2[i].value;
     }
     dashboard.textContent = `$${balance}`;
 }
