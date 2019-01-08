@@ -8,10 +8,12 @@ let drawData2 = new Array();
 
 function loadData(){
     if(localStorage.length === 0)return;
-    drawData = JSON.parse(localStorage.drawData);
-    drawData2 = JSON.parse(localStorage.drawData2);
-    if(drawData.length === 0 || drawData2.length === 0)return;
-    drawChart();
+    myCryptoWallet = JSON.parse(localStorage.myCryptoWallet);
+    getDrawData();
+}
+
+function refresh(){
+    loadData();
 }
 
 function drawChart() {
@@ -186,8 +188,7 @@ function saveToCache(){
 }
 
 function deleteCache(){
-    localStorage.drawData = undefined;
-    localStorage.drawData2 = undefined;
+    localStorage.myCryptoWallet = undefined;
 }
 
 function getDrawData(){
@@ -207,8 +208,7 @@ function getDrawData(){
                 temp2.name = result.data[key].symbol;
                 drawData2.push(temp2);
             }
-            localStorage.drawData = JSON.stringify(drawData);
-            localStorage.drawData2 = JSON.stringify(drawData2);
+            localStorage.myCryptoWallet = JSON.stringify(myCryptoWallet);
             drawChart();
         })
         .catch((err) => {
