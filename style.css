@@ -18,11 +18,12 @@
     background-image: url('/css/searchicon.png');
     background-position: 10px 12px;
     background-repeat: no-repeat;
-    width: 80%;
+    width: 100%;
     font-size: 16px;
     padding: 12px 20px 12px 20px;
-    border: 1px solid #adadad;
+    /* border: 1px solid #adadad; */
     margin-bottom: 12px;
+    text-align: center;
 }
 
 /* save data button style Start */
@@ -39,7 +40,7 @@
   height: 60px;
   transition: all 0.5s;
   cursor: pointer;
-  margin: 5px;
+  margin: 1px 10px 5px 10px;
 }
 
 .button span {
