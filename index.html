@@ -29,9 +29,11 @@
                 <span class="sumUSD"></span><span>USD</span>
             </span>
             <input type="text" id="crytoCheck" onkeyup="myCrytoCheck()" placeholder="Search for Crypto currencies ..." title="Type in a name">
-            <button class="button" onclick="saveToCache()" style="vertical-align:middle"><span>SAVE </span></button>
-            <button class="button" onclick="deleteCache()" style="vertical-align:middle"><span>RESET</span></button>
-            <button class="button" onclick="refresh()" style="vertical-align:middle"><span>REFRESH</span></button>
+            <div class="flex">
+                <button class="button" onclick="saveToCache()" style="vertical-align:middle"><span>SAVE </span></button>
+                <button class="button" onclick="deleteCache()" style="vertical-align:middle"><span>RESET</span></button>
+                <button class="button" onclick="refresh()" style="vertical-align:middle"><span>REFRESH</span></button>
+            </div>
         </div>
         <ul id="myUL">
         <!-- <li><a href="#"></a></li> for search list -->
