@@ -27,6 +27,11 @@
 }
 
 /* save data button style Start */
+.flex {
+    display: flex;
+    flex-wrap: wrap;
+}
+
 .button {
   display: inline-block;
   border-radius: 10px;
@@ -41,6 +46,8 @@
   transition: all 0.5s;
   cursor: pointer;
   margin: 1px 10px 5px 10px;
+
+  flex: 1 1 165px;
 }
 
 .button span {
