@@ -7,9 +7,11 @@ let drawData = new Array();
 let drawData2 = new Array();
 
 function loadData(){
+    //return when no storage data.
     if(localStorage.length === 0)return;
     myCryptoWallet = JSON.parse(localStorage.myCryptoWallet);
     getDrawData();
+    // inputDataToList(myCryptoWallet);
 }
 
 function refresh(){
@@ -126,13 +128,16 @@ function myCrytoCheck() {
     }
 }
 
-
+//Run when loading the web.
 const listingsPromise = fetch('https://api.coinmarketcap.com/v2/listings/');
 listingsPromise.then(result => result.json())
     .then(result => {
         CoinMarketCapCryptoList = result.data;
         console.log(CoinMarketCapCryptoList);
         createSearchList(CoinMarketCapCryptoList);
+        if(myCryptoWallet !== "" || myCryptoWallet !== null){
+            inputDataToList(myCryptoWallet);
+        }
     })
     .catch((err) => {
         console.error(err);
@@ -189,6 +194,11 @@ function saveToCache(){
 
 function deleteCache(){
     localStorage.myCryptoWallet = undefined;
+    for(let i=0;i<myCryptoWallet.length;i++){
+        document.getElementById(`checkbox_${myCryptoWallet[i].id}`).checked = false;
+        document.getElementById(`crytoVolume_${myCryptoWallet[i].id}`).classList.add("crytoVolume");
+        document.getElementById(`crytoVolume_${myCryptoWallet[i].id}`).value = '';
+    }
 }
 
 function getDrawData(){
@@ -214,4 +224,12 @@ function getDrawData(){
         .catch((err) => {
             console.error(err);
         })
+}
+
+function inputDataToList(myCryptoWallet){
+    for(let i=0;i<myCryptoWallet.length;i++){
+        document.getElementById(`checkbox_${myCryptoWallet[i].id}`).checked = true;
+        document.getElementById(`crytoVolume_${myCryptoWallet[i].id}`).classList.remove("crytoVolume");
+        document.getElementById(`crytoVolume_${myCryptoWallet[i].id}`).value = myCryptoWallet[i].volume;
+    }
 }
