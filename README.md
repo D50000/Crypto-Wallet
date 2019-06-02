@@ -10,10 +10,10 @@ https://d50000.github.io/Crypto-Wallet/
  - Support all Kinds of Cryptocurrency. (data source: https://coinmarketcap.com/)
  - Local storage in your own browser.
 #### Todo
-	Issue 1: list and detail api not match.
+	Issue 1: list and detail api not match and not up to date.
 	Issue 2: input NaN check.
 
 #### Postscript:
 Input volume example:
- - [ ]![](https://github.com/D50000/Crypto-Wallet/blob/master/ps1.PNG)
-~~Don't support specil comma and symbol.
+![](https://github.com/D50000/Crypto-Wallet/blob/master/ps1.PNG)
+~~Don't support special "comma" and "symbol".~~
