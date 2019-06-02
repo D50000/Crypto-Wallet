@@ -14,7 +14,6 @@ https://d50000.github.io/Crypto-Wallet/
 	Issue 2: input NaN check.
 
 #### Postscript:
-    Input volume example:
-        ![](https://github.com/D50000/css-grid-master-D5000/blob/master/04%20-%20CSS%20Grid%20Dev%20Tools/Line%20Meanings.png)
-
-    Don't support specil comma and symbol.
+Input volume example:
+ - [ ]![](https://github.com/D50000/Crypto-Wallet/blob/master/ps1.PNG)
+~~Don't support specil comma and symbol.
