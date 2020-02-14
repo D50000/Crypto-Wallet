@@ -1,5 +1,5 @@
 //List for coin informations
-let CoinMarketCapCryptoList = new Array();
+let CoinMarketCapCryptoList = new Object();
 //User CyptoCurrencies Amount of array.
 let myCryptoWallet = new Array();
 //Data for Draw the Chart
@@ -129,7 +129,7 @@ function myCrytoCheck() {
 }
 
 //Run when loading the web.
-const listingsPromise = fetch('https://api.coinmarketcap.com/v2/listings/');
+const listingsPromise = fetch('https://api.coinmarketcap.com/v2/ticker/');
 listingsPromise.then(result => result.json())
     .then(result => {
         CoinMarketCapCryptoList = result.data;
@@ -153,42 +153,48 @@ function toggleCheckbox(coinId, coinSymbol, e) {
     }
 }
 
-function createSearchList(arrayData) {
-    arrayData.map(coin => {
+function createSearchList(objectData) {
+    Object.entries(objectData).forEach((entry) => {
         let li_node = document.createElement("li");
         let a_node = document.createElement("a");
         // a_node.setAttribute('href', "#");
         let checkbox_node = document.createElement("input");
         checkbox_node.setAttribute("type", "checkbox");
-        checkbox_node.setAttribute("id", `checkbox_${coin.id}`);
-        let textnode = document.createTextNode(`${coin.name} (${coin.symbol})`);
+        checkbox_node.setAttribute("id", `checkbox_${entry[0]}`);
+        let textnode = document.createTextNode(`${entry[1].name} (${entry[1].symbol})`);
         let inputbox_node = document.createElement("input");
         inputbox_node.setAttribute("type", "text");
-        inputbox_node.setAttribute("id", `crytoVolume_${coin.id}`);
+        inputbox_node.setAttribute("id", `crytoVolume_${entry[0]}`);
         inputbox_node.setAttribute("class", "crytoVolume");
-        inputbox_node.setAttribute("placeholder", `Input ${coin.symbol} volume ...`);
+        inputbox_node.setAttribute("placeholder", `Input ${entry[1].symbol} volume ...`);
         a_node.appendChild(checkbox_node)
         a_node.appendChild(textnode);
         a_node.appendChild(inputbox_node);
         li_node.appendChild(a_node);
         document.getElementById("myUL").appendChild(li_node);
-        document.getElementById(`checkbox_${coin.id}`).addEventListener("click", function(e) {
-            toggleCheckbox(coin.id, coin.symbol, e);
+        document.getElementById(`checkbox_${entry[0]}`).addEventListener("click", function(e) {
+            toggleCheckbox(entry[0], entry[1].symbol, e);
         });
     });
 }
 
 function saveToCache(){
     myCryptoWallet = [];
-    for (let i = 0; i < CoinMarketCapCryptoList.length; i++) {
+    Object.entries(CoinMarketCapCryptoList).forEach((entry) => {
         let coin;
-        document.getElementById("crytoVolume_" + CoinMarketCapCryptoList[i].id).value == "" ? coin = null : coin = parseFloat(document.getElementById("crytoVolume_" + CoinMarketCapCryptoList[i].id).value);
+        document.getElementById("crytoVolume_" + entry[0]).value == "" ? coin = null : coin = parseFloat(document.getElementById("crytoVolume_" + entry[0]).value);
         if(coin !== 0 && coin !== null && coin !== NaN){
             //console.log(coin);
-            CoinMarketCapCryptoList[i].volume = coin;
-            myCryptoWallet.push(CoinMarketCapCryptoList[i]);
+            let obj = new Object;
+            obj.id = entry[0];
+            obj.name = entry[1].name;
+            obj.symbol = entry[1].symbol;
+            obj.website_slug = entry[1].website_slug;
+            obj.volume = coin;
+            myCryptoWallet.push(obj);
         }
-    }
+    });
+    
     getDrawData();
 }
 
