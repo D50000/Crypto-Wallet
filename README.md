@@ -13,9 +13,12 @@ https://d50000.github.io/Crypto-Wallet/
 #### Todo
 "WARNING: This API is now deprecated and will be taken offline soon.  
 Please switch to the new CoinMarketCap API to avoid interruptions in service.(https://pro.coinmarketcap.com/migrate/)"  
-	Issue 1: input NaN check.
+	Issue: 
+    - input NaN check. Don't support special "comma" and "symbol".  
+    Feature: 
+    - add a button that toggle all crypto coin.
 
 #### Postscript:
 Input volume example:
-![](https://github.com/D50000/Crypto-Wallet/blob/master/ps1.PNG)
-~~Don't support special "comma" and "symbol".~~
+![](https://github.com/D50000/Crypto-Wallet/blob/master/ps2.PNG)
+
