@@ -1,3 +1,7 @@
+# Application Updating
+{"statusCode": 410,"error": "Gone","message": "WARNING: This API is now offline. Please switch to the new CoinMarketCap API. (https://pro.coinmarketcap.com/migrate/)"}
+
+
 # Crypto-Wallet
 It's a Crpto-Wallet in local browser.
 Let you manage all your Cryptocurrency and combine them in this dashboard.
