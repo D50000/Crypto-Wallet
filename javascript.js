@@ -129,7 +129,18 @@ function myCrytoCheck() {
 }
 
 //Run when loading the web.
-const listingsPromise = fetch('https://api.coinmarketcap.com/v2/ticker/');
+const url = 'https://pro-api.coinmarketcap.com/v1/cryptocurrency/listings/latest';
+const listingsPromise = fetch(url, {
+        cache: 'no-cache', // *default, no-cache, reload, force-cache, only-if-cached
+        headers: {
+            'X-CMC_PRO_API_KEY': '388d93f1-9176-44f3-85b1-1fbb42e875ca',
+            'Accept': 'application/json'
+        },
+        method: 'GET', // *GET, POST, PUT, DELETE, etc.
+        mode: 'no-cors', // no-cors, cors, *same-origin
+        redirect: 'follow', // manual, *follow, error
+        referrer: 'no-referrer', // *client, no-referrer
+    });
 listingsPromise.then(result => result.json())
     .then(result => {
         CoinMarketCapCryptoList = result.data;
@@ -142,6 +153,7 @@ listingsPromise.then(result => result.json())
     .catch((err) => {
         console.error(err);
     })
+    
     
 function toggleCheckbox(coinId, coinSymbol, e) {
     if(document.getElementById(`checkbox_${coinId}`).checked == true){
