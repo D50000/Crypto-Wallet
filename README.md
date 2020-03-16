@@ -1,5 +1,6 @@
 # Application Updating
-{"statusCode": 410,"error": "Gone","message": "WARNING: This API is now offline. Please switch to the new CoinMarketCap API. (https://pro.coinmarketcap.com/migrate/)"}
+New api keep returning 401  
+https://coinmarketcap.com/api/documentation/v1/#operation/getV1CryptocurrencyQuotesLatest
 
 
 # Crypto-Wallet
