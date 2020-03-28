@@ -1,6 +1,9 @@
 # Application Updating
-New api keep returning 401  
-https://coinmarketcap.com/api/documentation/v1/#operation/getV1CryptocurrencyQuotesLatest
+~~New api keep returning 401
+https://coinmarketcap.com/api/documentation/v1/#operation/getV1CryptocurrencyQuotesLatest~~
+
+Use binance api
+https://python-binance.readthedocs.io/en/latest/_modules/binance/client.html#Client.get_all_tickers
 
 
 # Crypto-Wallet
