@@ -1,10 +1,6 @@
 # Application Updating
-~~New api keep returning 401
-https://coinmarketcap.com/api/documentation/v1/#operation/getV1CryptocurrencyQuotesLatest~~
-
-Use binance api
-https://python-binance.readthedocs.io/en/latest/_modules/binance/client.html#Client.get_all_tickers
-
+~~New api
+https://api.binance.com/api/v3/ticker/24hr
 
 # Crypto-Wallet
 It's a Crpto-Wallet in local browser.
