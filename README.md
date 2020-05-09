@@ -1,6 +1,7 @@
 # Application Updating
-~~New api
-https://api.binance.com/api/v3/ticker/24hr
+New api  
+https://api.binance.com/api/v3/ticker/24hr  
+https://binance-docs.github.io/apidocs/spot/en/
 
 # Crypto-Wallet
 It's a Crpto-Wallet in local browser.
