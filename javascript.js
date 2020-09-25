@@ -1,5 +1,5 @@
 //List for coin informations
-let CoinMarketCapCryptoList = new Object();
+let cryptoList = new Array();
 //User CyptoCurrencies Amount of array.
 let myCryptoWallet = new Array();
 //Data for Draw the Chart
@@ -127,34 +127,6 @@ function myCrytoCheck() {
         }
     }
 }
-
-//Run when loading the web.
-const url = 'https://pro-api.coinmarketcap.com/v1/cryptocurrency/listings/latest';
-const headers = new Headers();
-headers.append('X-CMC_PRO_API_KEY', '388d93f1-9176-44f3-85b1-1fbb42e875ca');
-headers.append('Accept', 'application/json');
-
-const listingsPromise = fetch(url, {
-        cache: 'no-cache', // *default, no-cache, reload, force-cache, only-if-cached
-        method: 'GET', // *GET, POST, PUT, DELETE, etc.
-        mode: 'no-cors', // no-cors, cors, *same-origin
-        redirect: 'follow', // manual, *follow, error
-        referrer: 'no-referrer', // *client, no-referrer
-        headers
-    });
-listingsPromise.then(result => result.json())
-    .then(result => {
-        CoinMarketCapCryptoList = result.data;
-        console.log(CoinMarketCapCryptoList);
-        createSearchList(CoinMarketCapCryptoList);
-        if(myCryptoWallet !== "" || myCryptoWallet !== null){
-            inputDataToList(myCryptoWallet);
-        }
-    })
-    .catch((err) => {
-        console.error(err);
-    })
-    
     
 function toggleCheckbox(coinId, coinSymbol, e) {
     if(document.getElementById(`checkbox_${coinId}`).checked == true){
@@ -193,7 +165,7 @@ function createSearchList(objectData) {
 
 function saveToCache(){
     myCryptoWallet = [];
-    Object.entries(CoinMarketCapCryptoList).forEach((entry) => {
+    Object.entries(cryptoList).forEach((entry) => {
         let coin;
         document.getElementById("crytoVolume_" + entry[0]).value == "" ? coin = null : coin = parseFloat(document.getElementById("crytoVolume_" + entry[0]).value);
         if(coin !== 0 && coin !== null && coin !== NaN){
@@ -221,7 +193,7 @@ function deleteCache(){
 }
 
 function getDrawData(){
-    const detialCryptoList = fetch('https://api.coinmarketcap.com/v2/ticker/');
+    const detialCryptoList = fetch('https://api.binance.com/api/v3/ticker/24hr');
     detialCryptoList.then(result => result.json())
         .then(result => {
             drawData = [];
@@ -252,3 +224,28 @@ function inputDataToList(myCryptoWallet){
         document.getElementById(`crytoVolume_${myCryptoWallet[i].id}`).value = myCryptoWallet[i].volume;
     }
 }
+
+//Run when loading the web.
+const allTickers = fetch('https://api.binance.com/api/v3/ticker/price');
+allTickers.then(result => result.json())
+    .then(result => {
+        drawData = [];
+        drawData2 = [];
+        for(let i=0;i<result.length;i++){
+            let temp = new Object;
+            if(result[i].symbol.endsWith("USDT")) {
+                temp.id = [i];
+                temp.symbol = result[i].symbol.split("USDT")[0];
+                temp.price = result[i].price;
+                cryptoList.push(temp);
+            }
+        }
+        console.log(cryptoList);
+        createSearchList(cryptoList);
+        if(myCryptoWallet !== "" || myCryptoWallet !== null){
+            inputDataToList(myCryptoWallet);
+        }
+    })
+    .catch((err) => {
+        console.error(err);
+    })

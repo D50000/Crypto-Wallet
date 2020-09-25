@@ -20,15 +20,11 @@ https://d50000.github.io/Crypto-Wallet/
 
 ## features
  - **Simple**, **convenience**, **visualization** and easy to use.
- - Support all **kinds of Cryptocurrency**. (data source: https://coinmarketcap.com/)
+ - Support all **kinds of Cryptocurrency**. (data source: https://api.binance.com/api/)
  - Live data and **latest market price**.
  - **Local storage** in your own browser.
-#### Todo
-"WARNING: This API is now deprecated and will be taken offline soon.  
-Please switch to the new CoinMarketCap API to avoid interruptions in service.(https://pro.coinmarketcap.com/migrate/)"  
+#### Todo-
 	Issue:  
     - input NaN check. Don't support special "comma" and "symbol".  
     Feature:  
     - add a button that toggle all crypto coin.
-
-
