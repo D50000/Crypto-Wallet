@@ -193,28 +193,21 @@ function deleteCache(){
 }
 
 function getDrawData(){
-    const detialCryptoList = fetch('https://api.binance.com/api/v3/ticker/24hr');
-    detialCryptoList.then(result => result.json())
-        .then(result => {
-            drawData = [];
-            drawData2 = [];
-            for(let i=0;i<myCryptoWallet.length;i++){
-                let temp = new Object;
-                let temp2 = new Object;
-                let key = (myCryptoWallet[i].id);
-                temp.value = myCryptoWallet[i].volume;
-                temp.name = result.data[key].symbol;
-                drawData.push(temp);
-                temp2.value = myCryptoWallet[i].volume * result.data[key].quotes.USD.price;
-                temp2.name = result.data[key].symbol;
-                drawData2.push(temp2);
-            }
-            localStorage.myCryptoWallet = JSON.stringify(myCryptoWallet);
-            drawChart();
-        })
-        .catch((err) => {
-            console.error(err);
-        })
+    drawData = [];
+    drawData2 = [];
+    for(let i=0;i<myCryptoWallet.length;i++){
+        let temp = new Object;
+        let temp2 = new Object;
+        let key = (myCryptoWallet[i].id);
+        temp.value = myCryptoWallet[i].volume;
+        temp.name = cryptoList[key].symbol;
+        drawData.push(temp);
+        temp2.value = myCryptoWallet[i].volume * cryptoList[key].price;
+        temp2.name = cryptoList[key].symbol;
+        drawData2.push(temp2);
+    }
+    localStorage.myCryptoWallet = JSON.stringify(myCryptoWallet);
+    drawChart();
 }
 
 function inputDataToList(myCryptoWallet){
@@ -229,12 +222,10 @@ function inputDataToList(myCryptoWallet){
 const allTickers = fetch('https://api.binance.com/api/v3/ticker/price');
 allTickers.then(result => result.json())
     .then(result => {
-        drawData = [];
-        drawData2 = [];
         for(let i=0;i<result.length;i++){
             let temp = new Object;
             if(result[i].symbol.endsWith("USDT")) {
-                temp.id = [i];
+                temp.coin_id = i;
                 temp.symbol = result[i].symbol.split("USDT")[0];
                 temp.price = result[i].price;
                 cryptoList.push(temp);
