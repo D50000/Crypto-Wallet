@@ -7,8 +7,31 @@ let drawData = new Array();
 let drawData2 = new Array();
 
 function loadData(){
+    //Run when loading the web.
+    const allTickers = fetch('https://api.binance.com/api/v3/ticker/price');
+    allTickers.then(result => result.json())
+        .then(result => {
+            for(let i=0;i<result.length;i++){
+                let temp = new Object;
+                if(result[i].symbol.endsWith("USDT")) {
+                    temp.coin_id = i;
+                    temp.symbol = result[i].symbol.split("USDT")[0];
+                    temp.price = result[i].price;
+                    cryptoList.push(temp);
+                }
+            }
+            console.log(cryptoList);
+            createSearchList(cryptoList);
+            if(myCryptoWallet !== "" || myCryptoWallet !== null){
+                inputDataToList(myCryptoWallet);
+            }
+        })
+        .catch((err) => {
+            console.error(err);
+        })
+
     //return when no storage data.
-    if(localStorage.length === 0)return;
+    if(localStorage.length === 0 || localStorage.myCryptoWallet !== undefined) return;
     myCryptoWallet = JSON.parse(localStorage.myCryptoWallet);
     getDrawData();
     // inputDataToList(myCryptoWallet);
@@ -190,6 +213,8 @@ function deleteCache(){
         document.getElementById(`crytoVolume_${myCryptoWallet[i].id}`).classList.add("crytoVolume");
         document.getElementById(`crytoVolume_${myCryptoWallet[i].id}`).value = '';
     }
+
+    refresh();
 }
 
 function getDrawData(){
@@ -217,26 +242,3 @@ function inputDataToList(myCryptoWallet){
         document.getElementById(`crytoVolume_${myCryptoWallet[i].id}`).value = myCryptoWallet[i].volume;
     }
 }
-
-//Run when loading the web.
-const allTickers = fetch('https://api.binance.com/api/v3/ticker/price');
-allTickers.then(result => result.json())
-    .then(result => {
-        for(let i=0;i<result.length;i++){
-            let temp = new Object;
-            if(result[i].symbol.endsWith("USDT")) {
-                temp.coin_id = i;
-                temp.symbol = result[i].symbol.split("USDT")[0];
-                temp.price = result[i].price;
-                cryptoList.push(temp);
-            }
-        }
-        console.log(cryptoList);
-        createSearchList(cryptoList);
-        if(myCryptoWallet !== "" || myCryptoWallet !== null){
-            inputDataToList(myCryptoWallet);
-        }
-    })
-    .catch((err) => {
-        console.error(err);
-    })
