@@ -31,7 +31,7 @@ function loadData(){
         })
 
     //return when no storage data.
-    if(localStorage.length === 0 || localStorage.myCryptoWallet !== undefined) return;
+    if(localStorage.length === 0 || localStorage.myCryptoWallet === "undefined") return;
     myCryptoWallet = JSON.parse(localStorage.myCryptoWallet);
     getDrawData();
     // inputDataToList(myCryptoWallet);
@@ -214,7 +214,9 @@ function deleteCache(){
         document.getElementById(`crytoVolume_${myCryptoWallet[i].id}`).value = '';
     }
 
-    refresh();
+    drawData = null;
+    drawData2 = null;
+    drawChart();
 }
 
 function getDrawData(){
