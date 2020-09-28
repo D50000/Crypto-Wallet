@@ -113,7 +113,7 @@ function drawChart() {
 }
 
 //find cryto bar
-function myCrytoCheck() {
+function searchCryto() {
     let input = document.getElementById("crytoCheck");
     let filter = input.value.toUpperCase();
     let ul = document.getElementById("myUL");
