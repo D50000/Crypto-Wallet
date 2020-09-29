@@ -6,14 +6,14 @@ let myCryptoWallet = new Array();
 let drawData = new Array();
 let drawData2 = new Array();
 
-function loadData(){
+function loadData() {
     //Run when loading the web.
     const allTickers = fetch('https://api.binance.com/api/v3/ticker/price');
     allTickers.then(result => result.json())
         .then(result => {
-            for(let i=0;i<result.length;i++){
+            for (let i = 0; i < result.length; i++) {
                 let temp = new Object;
-                if(result[i].symbol.endsWith("USDT")) {
+                if (result[i].symbol.endsWith("USDT")) {
                     temp.coin_id = i;
                     temp.symbol = result[i].symbol.split("USDT")[0];
                     temp.price = result[i].price;
@@ -22,22 +22,26 @@ function loadData(){
             }
             console.log(cryptoList);
             createSearchList(cryptoList);
-            if(myCryptoWallet !== "" || myCryptoWallet !== null){
+            if (myCryptoWallet !== "" || myCryptoWallet !== null) {
                 inputDataToList(myCryptoWallet);
             }
+            checkLocalStorage();
         })
         .catch((err) => {
             console.error(err);
         })
 
+}
+
+function checkLocalStorage() {
     //return when no storage data.
-    if(localStorage.length === 0 || localStorage.myCryptoWallet === "undefined") return;
+    if (localStorage.length === 0 || localStorage.myCryptoWallet === "undefined") return;
     myCryptoWallet = JSON.parse(localStorage.myCryptoWallet);
     getDrawData();
     // inputDataToList(myCryptoWallet);
 }
 
-function refresh(){
+function refresh() {
     loadData();
 }
 
@@ -56,11 +60,11 @@ function drawChart() {
         },
         series: [
             {
-                name:'Volume',
-                type:'pie',
+                name: 'Volume',
+                type: 'pie',
                 selectedMode: 'single',
                 radius: [0, '30%'],
-    
+
                 label: {
                     normal: {
                         position: 'inner'
@@ -74,8 +78,8 @@ function drawChart() {
                 data: drawData
             },
             {
-                name:'Balance',
-                type:'pie',
+                name: 'Balance',
+                type: 'pie',
                 radius: ['40%', '55%'],
                 label: {
                     normal: {
@@ -129,7 +133,7 @@ function drawChart() {
     myChart.setOption(option);
     const dashboard = document.getElementsByClassName('sumUSD')[0];
     let balance = 0;
-    for(let i=0;i<drawData.length;i++){
+    for (let i = 0; i < drawData.length; i++) {
         balance += drawData2[i].value;
     }
     dashboard.textContent = `$${balance}`;
@@ -150,13 +154,13 @@ function searchCryto() {
         }
     }
 }
-    
+
 function toggleCheckbox(coinId, coinSymbol, e) {
-    if(document.getElementById(`checkbox_${coinId}`).checked == true){
+    if (document.getElementById(`checkbox_${coinId}`).checked == true) {
         // console.log(e);
         document.getElementById(`crytoVolume_${coinId}`).classList.remove("crytoVolume");
-    }else{
-        document.getElementById(`crytoVolume_${coinId}`).value="";
+    } else {
+        document.getElementById(`crytoVolume_${coinId}`).value = "";
         document.getElementById(`crytoVolume_${coinId}`).classList.add("crytoVolume");
     }
 }
@@ -180,18 +184,18 @@ function createSearchList(objectData) {
         a_node.appendChild(inputbox_node);
         li_node.appendChild(a_node);
         document.getElementById("myUL").appendChild(li_node);
-        document.getElementById(`checkbox_${entry[0]}`).addEventListener("click", function(e) {
+        document.getElementById(`checkbox_${entry[0]}`).addEventListener("click", function (e) {
             toggleCheckbox(entry[0], entry[1].symbol, e);
         });
     });
 }
 
-function saveToCache(){
+function saveToCache() {
     myCryptoWallet = [];
     Object.entries(cryptoList).forEach((entry) => {
         let coin;
         document.getElementById("crytoVolume_" + entry[0]).value == "" ? coin = null : coin = parseFloat(document.getElementById("crytoVolume_" + entry[0]).value);
-        if(coin !== 0 && coin !== null && coin !== NaN){
+        if (coin !== 0 && coin !== null && coin !== NaN) {
             //console.log(coin);
             let obj = new Object;
             obj.id = entry[0];
@@ -202,13 +206,13 @@ function saveToCache(){
             myCryptoWallet.push(obj);
         }
     });
-    
+
     getDrawData();
 }
 
-function deleteCache(){
+function deleteCache() {
     localStorage.myCryptoWallet = undefined;
-    for(let i=0;i<myCryptoWallet.length;i++){
+    for (let i = 0; i < myCryptoWallet.length; i++) {
         document.getElementById(`checkbox_${myCryptoWallet[i].id}`).checked = false;
         document.getElementById(`crytoVolume_${myCryptoWallet[i].id}`).classList.add("crytoVolume");
         document.getElementById(`crytoVolume_${myCryptoWallet[i].id}`).value = '';
@@ -219,10 +223,10 @@ function deleteCache(){
     drawChart();
 }
 
-function getDrawData(){
+function getDrawData() {
     drawData = [];
     drawData2 = [];
-    for(let i=0;i<myCryptoWallet.length;i++){
+    for (let i = 0; i < myCryptoWallet.length; i++) {
         let temp = new Object;
         let temp2 = new Object;
         let key = (myCryptoWallet[i].id);
@@ -237,8 +241,8 @@ function getDrawData(){
     drawChart();
 }
 
-function inputDataToList(myCryptoWallet){
-    for(let i=0;i<myCryptoWallet.length;i++){
+function inputDataToList(myCryptoWallet) {
+    for (let i = 0; i < myCryptoWallet.length; i++) {
         document.getElementById(`checkbox_${myCryptoWallet[i].id}`).checked = true;
         document.getElementById(`crytoVolume_${myCryptoWallet[i].id}`).classList.remove("crytoVolume");
         document.getElementById(`crytoVolume_${myCryptoWallet[i].id}`).value = myCryptoWallet[i].volume;
