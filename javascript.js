@@ -133,6 +133,10 @@ function drawChart() {
     myChart.setOption(option);
     const dashboard = document.getElementsByClassName('sumUSD')[0];
     let balance = 0;
+    if (!drawData || !drawData2) {
+        dashboard.textContent = `$${balance}`;
+        return;
+    };
     for (let i = 0; i < drawData.length; i++) {
         balance += drawData2[i].value;
     }
