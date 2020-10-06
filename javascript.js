@@ -22,7 +22,7 @@ function loadData() {
             }
             console.log(cryptoList);
             createSearchList(cryptoList);
-            if (myCryptoWallet !== "" || myCryptoWallet !== null) {
+            if (myCryptoWallet !== "" && myCryptoWallet !== null && myCryptoWallet.length !== 0) {
                 inputDataToList(myCryptoWallet);
             }
             checkLocalStorage();
@@ -30,15 +30,14 @@ function loadData() {
         .catch((err) => {
             console.error(err);
         })
-
 }
 
 function checkLocalStorage() {
     //return when no storage data.
     if (localStorage.length === 0 || localStorage.myCryptoWallet === "undefined") return;
     myCryptoWallet = JSON.parse(localStorage.myCryptoWallet);
+    inputDataToList(myCryptoWallet);
     getDrawData();
-    // inputDataToList(myCryptoWallet);
 }
 
 function refresh() {
