@@ -8,6 +8,7 @@ let drawData2 = new Array();
 
 function loadData() {
     //Run when loading the web.
+    cryptoList = [];
     const allTickers = fetch('https://api.binance.com/api/v3/ticker/price');
     allTickers.then(result => result.json())
         .then(result => {
@@ -169,6 +170,8 @@ function toggleCheckbox(coinId, coinSymbol, e) {
 }
 
 function createSearchList(objectData) {
+    // erase the list
+    document.querySelector("#myUL").innerHTML = "";
     Object.entries(objectData).forEach((entry) => {
         let li_node = document.createElement("li");
         let a_node = document.createElement("a");
@@ -220,9 +223,10 @@ function deleteCache() {
         document.getElementById(`crytoVolume_${myCryptoWallet[i].id}`).classList.add("crytoVolume");
         document.getElementById(`crytoVolume_${myCryptoWallet[i].id}`).value = '';
     }
-
+    // Reset
     drawData = null;
     drawData2 = null;
+    myCryptoWallet = [];
     drawChart();
 }
 
