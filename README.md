@@ -1,7 +1,6 @@
 # Application Updating
 New api  
 https://api.binance.com/api/v3/ticker/24hr  
-https://binance-docs.github.io/apidocs/spot/en/
 
 # Crypto-Wallet
 It's a Crpto-Wallet in local browser.
@@ -20,11 +19,15 @@ https://d50000.github.io/Crypto-Wallet/
 
 ## features
  - **Simple**, **convenience**, **visualization** and easy to use.
- - Support all **kinds of Cryptocurrency**. (data source: https://api.binance.com/api/)
+ - Support all **kinds of Cryptocurrency**. (data source: https://binance-docs.github.io/apidocs/spot/en/)
  - Live data and **latest market price**.
  - **Local storage** in your own browser.
+
 #### Todo-
 	Issue:  
     - input NaN check. Don't support special "comma" and "symbol".  
     Feature:  
-    - add a button that toggle all crypto coin.
+    - add a button that toggle all crypto coin on/off.
+    - add the search icon.
+    - Chart support RWD.
+    - Add more detail for all the crypto coin: white paper, full name, trend.
