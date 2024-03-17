@@ -1,10 +1,6 @@
 # Application Updating
-~~New api keep returning 401
-https://coinmarketcap.com/api/documentation/v1/#operation/getV1CryptocurrencyQuotesLatest~~
-
-Use binance api
-https://python-binance.readthedocs.io/en/latest/_modules/binance/client.html#Client.get_all_tickers
-
+New api  
+https://api.binance.com/api/v3/ticker/24hr  
 
 # Crypto-Wallet
 It's a Crpto-Wallet in local browser.
@@ -23,15 +19,15 @@ https://d50000.github.io/Crypto-Wallet/
 
 ## features
  - **Simple**, **convenience**, **visualization** and easy to use.
- - Support all **kinds of Cryptocurrency**. (data source: https://coinmarketcap.com/)
+ - Support all **kinds of Cryptocurrency**. (data source: https://binance-docs.github.io/apidocs/spot/en/)
  - Live data and **latest market price**.
  - **Local storage** in your own browser.
-#### Todo
-"WARNING: This API is now deprecated and will be taken offline soon.  
-Please switch to the new CoinMarketCap API to avoid interruptions in service.(https://pro.coinmarketcap.com/migrate/)"  
+
+#### Todo-
 	Issue:  
     - input NaN check. Don't support special "comma" and "symbol".  
     Feature:  
-    - add a button that toggle all crypto coin.
-
-
+    - add a button that toggle all crypto coin on/off.
+    - add the search icon.
+    - Chart support RWD.
+    - Add more detail for all the crypto coin: white paper, full name, trend.
