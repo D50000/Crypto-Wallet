@@ -1,6 +1,6 @@
-//List for coin informations
+//List for coin information
 let cryptoList = new Array()
-//User CyptoCurrencies Amount of array.
+//User CryptoCurrencies Amount of array.
 let myCryptoWallet = new Array()
 //Data for Draw the Chart
 let drawData = new Array()
@@ -144,9 +144,9 @@ function drawChart() {
   dashboard.textContent = `$${balance}`
 }
 
-//find cryto bar
-function searchCryto() {
-  let input = document.getElementById('crytoCheck')
+//find crypto bar
+function searchCrypto() {
+  let input = document.getElementById('cryptoCheck')
   let filter = input.value.toUpperCase()
   let ul = document.getElementById('myUL')
   let li = ul.getElementsByTagName('li')
@@ -163,10 +163,10 @@ function searchCryto() {
 function toggleCheckbox(coinId, coinSymbol, e) {
   if (document.getElementById(`checkbox_${coinId}`).checked == true) {
     // console.log(e);
-    document.getElementById(`crytoVolume_${coinId}`).classList.remove('crytoVolume')
+    document.getElementById(`cryptoVolume_${coinId}`).classList.remove('cryptoVolume')
   } else {
-    document.getElementById(`crytoVolume_${coinId}`).value = ''
-    document.getElementById(`crytoVolume_${coinId}`).classList.add('crytoVolume')
+    document.getElementById(`cryptoVolume_${coinId}`).value = ''
+    document.getElementById(`cryptoVolume_${coinId}`).classList.add('cryptoVolume')
   }
 }
 
@@ -183,8 +183,8 @@ function createSearchList(objectData) {
     let textnode = document.createTextNode(`${entry[1].name} (${entry[1].symbol})`)
     let inputbox_node = document.createElement('input')
     inputbox_node.setAttribute('type', 'text')
-    inputbox_node.setAttribute('id', `crytoVolume_${entry[0]}`)
-    inputbox_node.setAttribute('class', 'crytoVolume')
+    inputbox_node.setAttribute('id', `cryptoVolume_${entry[0]}`)
+    inputbox_node.setAttribute('class', 'cryptoVolume')
     inputbox_node.setAttribute('placeholder', `Input ${entry[1].symbol} volume ...`)
     a_node.appendChild(checkbox_node)
     a_node.appendChild(textnode)
@@ -201,9 +201,9 @@ function saveToCache() {
   myCryptoWallet = []
   Object.entries(cryptoList).forEach(entry => {
     let coin
-    document.getElementById('crytoVolume_' + entry[0]).value == ''
+    document.getElementById('cryptoVolume_' + entry[0]).value == ''
       ? (coin = null)
-      : (coin = parseFloat(document.getElementById('crytoVolume_' + entry[0]).value))
+      : (coin = parseFloat(document.getElementById('cryptoVolume_' + entry[0]).value))
     if (coin !== 0 && coin !== null && coin !== NaN) {
       //console.log(coin);
       let obj = new Object()
@@ -223,8 +223,8 @@ function deleteCache() {
   localStorage.myCryptoWallet = undefined
   for (let i = 0; i < myCryptoWallet.length; i++) {
     document.getElementById(`checkbox_${myCryptoWallet[i].id}`).checked = false
-    document.getElementById(`crytoVolume_${myCryptoWallet[i].id}`).classList.add('crytoVolume')
-    document.getElementById(`crytoVolume_${myCryptoWallet[i].id}`).value = ''
+    document.getElementById(`cryptoVolume_${myCryptoWallet[i].id}`).classList.add('cryptoVolume')
+    document.getElementById(`cryptoVolume_${myCryptoWallet[i].id}`).value = ''
   }
   // Reset
   drawData = null
@@ -254,7 +254,7 @@ function getDrawData() {
 function inputDataToList(myCryptoWallet) {
   for (let i = 0; i < myCryptoWallet.length; i++) {
     document.getElementById(`checkbox_${myCryptoWallet[i].id}`).checked = true
-    document.getElementById(`crytoVolume_${myCryptoWallet[i].id}`).classList.remove('crytoVolume')
-    document.getElementById(`crytoVolume_${myCryptoWallet[i].id}`).value = myCryptoWallet[i].volume
+    document.getElementById(`cryptoVolume_${myCryptoWallet[i].id}`).classList.remove('cryptoVolume')
+    document.getElementById(`cryptoVolume_${myCryptoWallet[i].id}`).value = myCryptoWallet[i].volume
   }
 }
