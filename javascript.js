@@ -15,6 +15,7 @@ function loadData() {
     .then(result => {
       for (let i = 0; i < result.length; i++) {
         let temp = new Object()
+        // Filter out the USDT pair only.
         if (result[i].symbol.endsWith('USDT')) {
           temp.coin_id = i
           temp.symbol = result[i].symbol.split('USDT')[0]
@@ -164,6 +165,8 @@ function searchCrypto() {
 const url =
   "https://pro-api.coinmarketcap.com/v1/cryptocurrency/listings/latest";
 const headers = new Headers();
+// TODO: api not working anymore can't get the full name of currency.
+// config data in our site. https://github.com/D50000/Crypto-Wallet-data/blob/main/rawData.csv
 headers.append("X-CMC_PRO_API_KEY", "388d93f1-9176-44f3-85b1-1fbb42e875ca");
 headers.append("Accept", "application/json");
 
